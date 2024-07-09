@@ -1,0 +1,25 @@
+Docker OCI Image:
+=================
+sudo docker image build -t karthik2502/prometheus_supervisor:v2.53.0 -f /home/vagrant/prometheus/prometheus_supervisor.dockerfile
+/home/vagrant/prometheus/context/
+
+Docker OCI Container: [Foreground mode]
+=====================
+sudo docker container run -i -t --rm \
+-v /home/vagrant/prometheus/server.conf:/etc/supervisord.conf \
+-v /home/vagrant/prometheus/supervisor.ini:/opt/prometheus/system/supervisor.ini \
+-p 9090:9090 \
+--entrypoint /usr/bin/supervisord \
+karthik2502/prometheus_supervisor:v2.53.0 \
+-c /etc/supervisord.conf
+
+Docker OCI Container: [Detach mode]
+=====================
+sudo docker container run -i -d -t --rm \
+-v /home/vagrant/prometheus/server.conf:/etc/supervisord.conf \
+-v /home/vagrant/prometheus/supervisor.ini:/opt/prometheus/system/supervisor.ini \
+-p 9090:9090 \
+--entrypoint /usr/bin/supervisord \
+karthik2502/prometheus_supervisor:v2.53.0 \
+-c /etc/supervisord.conf
+
